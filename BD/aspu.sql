@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2018 a las 06:22:34
+-- Tiempo de generación: 02-07-2018 a las 20:32:36
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -36,6 +36,20 @@ CREATE TABLE `comentario` (
   `usuario_usuario` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`id`, `fecha`, `mensaje`, `noticia_id`, `usuario_usuario`) VALUES
+(24, '2018-06-23', 'Yo queria que petro ganara ', 63, 'jose'),
+(39, '2018-06-26', ' Soy daQuin creador de esta pagina...', 65, 'daQuin'),
+(40, '2018-06-26', 'Vamos tigre Falcao..!!', 65, 'jose'),
+(44, '2018-06-27', 'Duque el mejor presidente de Colombiaa', 62, 'jose'),
+(46, '2018-06-27', 'SOY DAQUIN CREADOR DE ESTA PAGINA', 62, 'daQuin'),
+(47, '2018-06-27', 'Duque es el presidente que necesita el pais', 62, 'Sebastian'),
+(49, '2018-06-27', 'Las propuestas del presidente para la educacion del pais son muy Buenas', 62, 'maria'),
+(51, '2018-06-27', 'msamaosd', 65, 'maria');
+
 -- --------------------------------------------------------
 
 --
@@ -44,22 +58,12 @@ CREATE TABLE `comentario` (
 
 CREATE TABLE `evidencia` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `ruta` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
+  `nombre` varchar(500) DEFAULT NULL,
+  `ruta` varchar(200) DEFAULT NULL,
+  `tipo` varchar(10) NOT NULL,
+  `descripcion` varchar(1000) DEFAULT NULL,
   `noticia_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `evidencia`
---
-
-INSERT INTO `evidencia` (`id`, `nombre`, `ruta`, `descripcion`, `noticia_id`) VALUES
-(1, 'prueba', 'temp/img/prueba.jpg', NULL, 61),
-(2, 'prueba', 'temp/img/prueba.jpg', NULL, 61),
-(3, 'kkk', 'temp/img/kkk.jpg', 'JJJJ', 60),
-(4, 'IIIIII', 'temp/img/IIIIII.jpg', 'IIIIIIII', 60),
-(5, 'IIIIII', 'temp/img/IIIIII.jpg', 'IIIIIIII', 60);
 
 -- --------------------------------------------------------
 
@@ -82,10 +86,12 @@ CREATE TABLE `miembros` (
 --
 
 INSERT INTO `miembros` (`id`, `nombres`, `email`, `fecha`, `telefono`, `titulo`, `descripcion`) VALUES
-(1, 'Monica Ovallos', 'monica_ovallos@hotmail.com', NULL, '3212118813', '', ''),
-(2, 'Daniel', 'daniiel13.com@hotmail.com', '2018-06-14', '3212118812', '', ''),
-(3, 'Sebastian Ovallos', 'sebastianOd@gamil.com', '2018-06-15', '321 7671 772', 'Ing Sistemas ', ''),
-(4, 'Jose Jose', 'jose@gmail.com', '2018-06-15', '12312 12312 31', 'Ing Civil', 'descripcion de jose jose');
+(1, 'Monica Ovallos', 'monica_ovallos@hotmail.com', '2018-07-18', '3212118813', 'Ing Sistemas ', 'Ingeniera de sistemas de la UFPS'),
+(2, 'Daniel', 'daniiel13.com@hotmail.com', '2018-06-14', '3212118812', 'Ing Sistemas ', 'Ingeniero de sistemas de la UFPS'),
+(3, 'Sebastian Ovallos', 'sebastianOd@gamil.com', '2018-06-15', '321 7671 882', 'Ing Sistemas ', 'Ingeniero de sistemas Primer semestre'),
+(4, 'Tomas', 'tomas@gmail.com', '2018-06-20', '3212118813', 'Sargento segundo', 'Profesor de mantenmiento de casa'),
+(6, 'Keyly Ovallos', 'keyly@hotmail.com', '2018-06-20', '3212118812', 'Ing Sistemas ', 'Ingeniera de Sistemas con expecializacion en Aministracion de proyectos'),
+(8, 'Leonardo Amaya', 'leonardoAmaya@ufps.edu.co', '2018-06-27', '3212118813', 'Estudiante pregrado', 'Estudiante programacion web');
 
 -- --------------------------------------------------------
 
@@ -95,8 +101,8 @@ INSERT INTO `miembros` (`id`, `nombres`, `email`, `fecha`, `telefono`, `titulo`,
 
 CREATE TABLE `noticia` (
   `id` int(11) NOT NULL,
-  `titulo` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(300) DEFAULT NULL,
+  `titulo` varchar(200) DEFAULT NULL,
+  `descripcion` varchar(900) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `autor` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -106,8 +112,10 @@ CREATE TABLE `noticia` (
 --
 
 INSERT INTO `noticia` (`id`, `titulo`, `descripcion`, `fecha`, `autor`) VALUES
-(60, 'Innaguracion de Semillero', 'Se ignaguro el semillero de investigacion para mecanica hidraulica', '2018-06-14', 'Jose Perez'),
-(61, 'Tercera Noticia', ' Los  estudiantes de ingeniera de sistemas han hecho inscripcion a las convocatorias ACOFI, ', '2018-06-15', 'Miguel Bricenio');
+(62, 'Duque presidente', 'Duque presidente de colombia', '2018-06-18', 'Monica Ovallos'),
+(63, 'Petro Senador ', 'Petro Senador de colombia', '2018-06-18', 'Monica Ovallos'),
+(65, 'Colombia en el mundial', 'Colombia pierde su primer partido frente a Japon, debe ganar el domingo par tener esperanzas', '2018-06-20', 'Sebastian Ovallos'),
+(72, 'Sustentacion de Web', 'El ingemiero Rene rajo muchos estudiantes ', '2018-06-27', 'Daniel Quintero');
 
 -- --------------------------------------------------------
 
@@ -125,7 +133,8 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`id`, `descripcion`) VALUES
-(1, 'rol actualizado');
+(1, 'Administrador'),
+(2, 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -138,6 +147,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(45) DEFAULT NULL,
   `apellido` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -145,8 +155,12 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`usuario`, `nombre`, `apellido`, `password`, `rol_id`) VALUES
-('daQuin', 'Daniel', 'Quintero', 'pass', 1);
+INSERT INTO `usuario` (`usuario`, `nombre`, `apellido`, `password`, `email`, `rol_id`) VALUES
+('aleja', 'Alejandra', 'Ovallos', 'pass', '', 2),
+('daQuin', 'Daniel', 'Quintero S', 'pass', 'jesusdaniel132010@hotmail.com', 1),
+('jose', 'Jose David', 'Perez Sanchez', 'pass', 'daniielquiinteros@gmail.com', 2),
+('maria', 'Maria', 'Gomez', 'pass', 'maria@gmail.com', 2),
+('Sebastian', 'Sebastian', 'Ovallos Diaz', 'pass', 'sebastianOd@gamil.com', 2);
 
 --
 -- Índices para tablas volcadas
@@ -200,31 +214,31 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `evidencia`
 --
 ALTER TABLE `evidencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `miembros`
 --
 ALTER TABLE `miembros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
